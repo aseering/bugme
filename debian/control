@@ -2,8 +2,8 @@ Source: debathena-bugme
 Section: debathena/base
 Priority: extra
 Maintainer: Debathena Project <debathena@mit.edu>
-Build-Depends: @cdbs@
-Standards-Version: 3.8.0
+Build-Depends: cdbs, debhelper, dh-buildinfo
+Standards-Version: 3.9.3
 
 Package: debathena-bugme
 Architecture: all
