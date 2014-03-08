@@ -1,8 +1,9 @@
-debathena-bugme (10.0.6-0debathena1) UNRELEASED; urgency=low
+debathena-bugme (10.0.6-0debathena1) unstable; urgency=low
 
   * Release 10.0.6.
+  * Add git-buildpackage configuration
 
- -- Alexander Chernyakhovsky <achernya@mit.edu>  Fri, 07 Mar 2014 22:55:18 -0500
+ -- Alexander Chernyakhovsky <achernya@mit.edu>  Fri, 07 Mar 2014 22:56:50 -0500
 
 debathena-bugme (10.0.5-0debathena2) unstable; urgency=low
 
