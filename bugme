@@ -1,5 +1,10 @@
-#!/usr/bin/python -Wall
+#!/usr/bin/python3 -Wall
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from builtins import object
 import gtk
 import gtk.glade
 import gobject
@@ -8,7 +13,7 @@ import os
 import sys
 from optparse import OptionParser
 
-class BugMe:
+class BugMe(object):
     def __init__(self):
         # Time limit in seconds  (600)
         self.timeLimit = 600
@@ -33,7 +38,7 @@ class BugMe:
         try:
             self.xml = gtk.glade.XML(options.gladeFile)
         except:
-            print "Failed to create GladeXML object."
+            print("Failed to create GladeXML object.")
             # Kill the child
             os.kill(pid, 9)
             sys.exit(255)
@@ -67,7 +72,7 @@ class BugMe:
             sys.exit(0)
         now = int(time.time())
         elapsed = now - self.startTime
-        elapsedTime = (elapsed / 60, elapsed % 60)
+        elapsedTime = (elapsed // 60, elapsed % 60)
         self.elapsed_label.set_markup("<span foreground=\"%s\" background=\"%s\" font_desc=\"50\">%02d:%02d</span>" % (self.colors + elapsedTime))
         self.timerWindow.modify_bg(gtk.STATE_NORMAL, 
                                    gtk.gdk.color_parse(self.colors[1]))
@@ -79,11 +84,11 @@ class BugMe:
             if elapsed < self.timeLimit:
                 self.colors = ('black', 'orange')
             self.nextWarn = now + self.warnInterval
-            self.nag(((self.timeLimit - elapsed) / 60, 
+            self.nag((old_div((self.timeLimit - elapsed), 60), 
                       (self.timeLimit - elapsed) % 60))
         if options.killMode and elapsed >= self.killTime:
             # The user has outstayed their welcome, nuke their session
-            print "Quitting."
+            print("Quitting.")
             sys.exit(0)
 
 	# It's a little odd to put this here, but it doesn't work in
@@ -150,10 +155,10 @@ if __name__ == '__main__':
                       help="Specify a corner for the timer")
     (options, args) = parser.parse_args()
     if options.corner not in ("SE", "NW"):
-        print "Sorry, I don't know about the %s corner of the screen" % (options.corner)
+        print("Sorry, I don't know about the %s corner of the screen" % (options.corner))
         sys.exit(255)
     if not os.access(options.gladeFile, os.R_OK):
-        print 'error: Unable to read glade file "' + gladeFile + '"'
+        print('error: Unable to read glade file "' + gladeFile + '"')
         sys.exit(255)
     if len(args) < 1:
         parser.error("'progname' is required")
@@ -163,7 +168,7 @@ if __name__ == '__main__':
         try:
             os.execvp(args[0], args)
         except:
-            print "error: Could not execvp(%s,%s)" % (args[0], args)
+            print("error: Could not execvp(%s,%s)" % (args[0], args))
     else:
         BugMe()
         gtk.main()
